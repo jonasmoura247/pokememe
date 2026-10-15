@@ -1,0 +1,60 @@
+---
+tipo: pokemon
+dex: 958
+especie: Tinkatuff
+categoria: Nacional
+geracao: 9
+regiao: Paldea
+tipo1: FAIRY
+tipo2: STEEL
+hp: 65
+atk: 55
+def: 55
+spatk: 45
+spdef: 82
+spd: 78
+total: 380
+nivel_hunt: 123350
+preco_npc: 673302
+tags: [pokemon, fairy, steel, gen9]
+---
+
+# #958 Tinkatuff
+
+**Geração:** 9 (Paldea) · **Categoria:** Nacional · **Tipos:** FAIRY / STEEL
+**Hunt:** nível 123350 · **Preço NPC:** 673302
+
+Voltar: [[Pokedex]] · [[Pokemon]]
+
+## Atributos (stats-base)
+
+| HP | ATK | DEF | Sp.ATK | Sp.DEF | SPD | Total |
+|---|---|---|---|---|---|---|
+| 65 | 55 | 55 | 45 | 82 | 78 | **380** |
+
+## Defesas (dano recebido por tipo de golpe)
+
+Multiplicador da tabela de tipos; na hunt o valor é amplificado (coluna **Na hunt**) — ver [[Tipos- forças e fraquezas]].
+
+| Efeito | Tipos do golpe | Na hunt |
+|---|---|---|
+| Fraqueza ×4 | — | 5,5 |
+| Fraqueza ×2 | FIRE, GROUND, STEEL | 2,5 |
+| Resiste ×0,5 | NORMAL, GRASS, ICE, FLYING, PSYCHIC, ROCK, DARK, FAIRY | 0,333 |
+| Resiste ×0,25 | BUG | 0,167 |
+| Imune ×0 | POISON, DRAGON | 0 |
+
+## Golpes
+
+| Golpe | Tipo | Cat. | Poder | Recarga (s) | Dano/s | Nível |
+|---|---|---|---|---|---|---|
+| Draining Kiss | FAIRY | Esp. | 50 | 18.2 | 2.7 | 1 |
+| Fairy Wind | FAIRY | Esp. | 40 | 15.9 | 2.5 | 1 |
+| Flash Cannon | STEEL | Esp. | 80 | 25.3 | 3.2 | 1 |
+| Metal Claw | STEEL | Fís. | 50 | 18.2 | 2.7 | 1 |
+| Play Rough | FAIRY | Fís. | 90 | 27.6 | 3.3 | 1 |
+| Steel Beam | STEEL | Esp. | 140 | 32.4 | 4.3 | 4 |
+| Astonish | GHOST | Fís. | 30 | 13.5 | 2.2 | 6 |
+| Covet | NORMAL | Fís. | 60 | 20.6 | 2.9 | 10 |
+| Brutal Swing | DARK | Fís. | 60 | 20.6 | 2.9 | 16 |
+| Rock Smash | FIGHTING | Fís. | 40 | 15.9 | 2.5 | 16 |

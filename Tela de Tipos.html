@@ -1,0 +1,54 @@
+<!doctype html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tela de Tipos — PokeIdle</title>
+<style>
+:root{--bg:#fff;--fg:#1c1c1e;--mut:#6b6b70;--card:#f3f3f5;--line:#d9d9de;--g:#1a9e55;--r:#d6342c;--k:#555;--a:#2b6fd8}
+@media(prefers-color-scheme:dark){:root{--bg:#141416;--fg:#ececf0;--mut:#9a9aa3;--card:#202024;--line:#33333a;--g:#3ccf7a;--r:#ff6b5e;--k:#aaa;--a:#6ea2ff}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,sans-serif;padding:16px;max-width:980px;margin:auto}
+h1{font-size:20px;margin:0 0 4px}.mut{color:var(--mut);font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
+button.on{background:var(--a);color:#fff;border-color:var(--a)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.card h2{font-size:14px;margin:0 0 8px}
+.line{margin:6px 0}.lbl{font-weight:600;margin-right:6px}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);margin:2px 3px 2px 0;font-size:13px}
+.g{color:var(--g)}.r{color:var(--r)}.k{color:var(--k)}
+table{border-collapse:collapse;font-size:12px;margin-top:14px;width:100%;display:block;overflow:auto}
+td,th{border:1px solid var(--line);padding:3px 5px;text-align:center;white-space:nowrap}
+td.s{background:color-mix(in srgb,var(--g) 30%,transparent)}td.w{background:color-mix(in srgb,var(--r) 25%,transparent)}td.z{background:color-mix(in srgb,var(--k) 35%,transparent)}
+</style></head><body>
+<h1>Tela de Tipos</h1><div class="mut">Quem ganha de quem no PokeIdle. Escolha 1 ou 2 tipos (ex.: Pedra + Terra para o Geodude).</div>
+<div class="row" id="types"></div>
+<div class="row"><button id="hunt">Valores da hunt (amplificados)</button><button id="clear">Limpar</button></div>
+<div class="grid"><div class="card"><h2>Ataque — golpes desse tipo</h2><div id="atk"></div></div><div class="card"><h2>Defesa — golpes que recebe</h2><div id="def"></div></div></div>
+<table id="mx"></table>
+<script>
+const T=["NORMAL", "FIRE", "WATER", "GRASS", "ELECTRIC", "ICE", "FIGHTING", "POISON", "GROUND", "FLYING", "PSYCHIC", "BUG", "ROCK", "GHOST", "DRAGON", "DARK", "STEEL", "FAIRY"],PT=["Normal", "Fogo", "Água", "Planta", "Elétrico", "Gelo", "Lutador", "Veneno", "Terra", "Voador", "Psíquico", "Inseto", "Pedra", "Fantasma", "Dragão", "Sombrio", "Aço", "Fada"],C=[[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0, 1.0, 0.5, 1.0], [1.0, 1.0, 0.5, 2.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 1.0, 2.0, 1.0], [1.0, 2.0, 1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 1.0, 1.0], [1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 2.0, 0.5, 1.0, 0.5, 2.0, 1.0, 0.5, 1.0, 0.5, 1.0], [1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0], [1.0, 0.5, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0], [2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 0.5, 0.5, 0.5, 2.0, 0.0, 1.0, 2.0, 2.0, 0.5], [1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 0.5, 0.5, 1.0, 1.0, 0.0, 2.0], [1.0, 2.0, 1.0, 0.5, 2.0, 1.0, 1.0, 2.0, 1.0, 0.0, 1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0], [1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 0.5, 1.0], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.5, 1.0], [1.0, 0.5, 1.0, 2.0, 1.0, 1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 0.5, 1.0, 2.0, 0.5, 0.5], [1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 2.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0], [0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5], [1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0], [1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 0.5, 1.0]];let sel=[],hunt=false;
+const amp=v=>hunt?({0:0,.25:.167,.5:.333,1:1,2:2.5,4:5.5}[v]??v):v;
+const fx=v=>String(+(+v).toFixed(3)).replace('.',',');
+const chip=(i,v,c)=>`<span class="chip ${c}">${PT[i]} ×${fx(amp(v))}</span>`;
+function eff(att,defs){return defs.reduce((p,d)=>p*C[att][d],1)}
+function render(){
+ document.querySelectorAll('#types button').forEach((b,i)=>b.classList.toggle('on',sel.includes(i)));
+ document.getElementById('hunt').classList.toggle('on',hunt);
+ const A=document.getElementById('atk'),D=document.getElementById('def');
+ if(!sel.length){A.innerHTML=D.innerHTML='<span class="mut">Escolha um tipo acima.</span>';}
+ else{
+  // ataque: para cada tipo do pokémon, golpe contra cada tipo defensor
+  const best=T.map((_,d)=>Math.max(...sel.map(s=>C[s][d])));
+  const grp=(arr,pred)=>arr.map((v,i)=>[i,v]).filter(([i,v])=>pred(v));
+  A.innerHTML=[['Forte contra',v=>v>1,'g'],['Fraco contra',v=>v<1&&v>0,'r'],['Sem efeito',v=>v==0,'k']].map(([t,p,c])=>`<div class="line"><span class="lbl">${t}</span>${grp(best,p).map(([i,v])=>chip(i,v,c)).join('')||'<span class="mut">—</span>'}</div>`).join('')+
+   `<div class="mut">Vale o melhor entre os tipos escolhidos (o golpe de cada tipo é independente).</div>`;
+  const rec=T.map((_,a)=>eff(a,sel));
+  D.innerHTML=[['Fraco a',v=>v>1,'r'],['Resiste',v=>v<1&&v>0,'g'],['Imune',v=>v==0,'g']].map(([t,p,c])=>`<div class="line"><span class="lbl">${t}</span>${grp(rec,p).map(([i,v])=>chip(i,v,c)).join('')||'<span class="mut">—</span>'}</div>`).join('')+
+   `<div class="mut">Com 2 tipos os multiplicadores se multiplicam (×4 = fraqueza dupla).</div>`;
+ }
+ let h='<tr><th></th>'+PT.map(p=>`<th>${p}</th>`).join('')+'</tr>';
+ T.forEach((_,a)=>{h+=`<tr><th>${PT[a]}</th>`+T.map((_,d)=>{const v=C[a][d];return `<td class="${v>1?'s':v==0?'z':v<1?'w':''}">${v==1?'':fx(amp(v))}</td>`}).join('')+'</tr>'});
+ document.getElementById('mx').innerHTML=h;
+}
+const box=document.getElementById('types');
+T.forEach((_,i)=>{const b=document.createElement('button');b.textContent=PT[i];b.onclick=()=>{sel=sel.includes(i)?sel.filter(x=>x!=i):sel.length<2?[...sel,i]:[sel[1],i];render()};box.append(b)});
+document.getElementById('hunt').onclick=()=>{hunt=!hunt;render()};document.getElementById('clear').onclick=()=>{sel=[];render()};
+sel=[12,8];render();
+</script></body></html>

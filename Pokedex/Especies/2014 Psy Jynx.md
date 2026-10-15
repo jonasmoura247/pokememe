@@ -1,0 +1,62 @@
+---
+tipo: pokemon
+dex: 2014
+especie: Psy Jynx
+categoria: Variante de Outland
+geracao: 1
+regiao: Kanto
+tipo1: ICE
+tipo2: PSYCHIC
+hp: 65
+atk: 50
+def: 35
+spatk: 115
+spdef: 95
+spd: 95
+total: 455
+nivel_hunt: 150
+preco_npc: 60000
+tags: [pokemon, ice, psychic, gen1]
+---
+
+# #2014 Psy Jynx
+
+**Geração:** 1 (Kanto) · **Categoria:** Variante de Outland · **Tipos:** ICE / PSYCHIC
+**Hunt:** nível 150 · **Preço NPC:** 60000
+
+Voltar: [[Pokedex]] · [[Pokemon]]
+
+## Atributos (stats-base)
+
+| HP | ATK | DEF | Sp.ATK | Sp.DEF | SPD | Total |
+|---|---|---|---|---|---|---|
+| 65 | 50 | 35 | 115 | 95 | 95 | **455** |
+
+## Defesas (dano recebido por tipo de golpe)
+
+Multiplicador da tabela de tipos; na hunt o valor é amplificado (coluna **Na hunt**) — ver [[Tipos- forças e fraquezas]].
+
+| Efeito | Tipos do golpe | Na hunt |
+|---|---|---|
+| Fraqueza ×4 | — | 5,5 |
+| Fraqueza ×2 | FIRE, BUG, ROCK, GHOST, DARK, STEEL | 2,5 |
+| Resiste ×0,5 | — | 0,333 |
+| Resiste ×0,25 | — | 0,167 |
+| Imune ×0 | — | 0 |
+
+## Golpes
+
+| Golpe | Tipo | Cat. | Poder | Recarga (s) | Dano/s | Nível |
+|---|---|---|---|---|---|---|
+| Aurora Beam | ICE | Esp. | 65 | 21.8 | 3.0 | 1 |
+| Blizzard | ICE | Esp. | 110 | 30.6 | 3.6 | 1 |
+| Eerie Spell | PSYCHIC | Esp. | 80 | 25.3 | 3.2 | 1 |
+| Ice Beam | ICE | Esp. | 90 | 27.6 | 3.3 | 1 |
+| Ice Time | ICE | Esp. | 600 | 60 | 10.0 | 1 |
+| Icy Wind | ICE | Esp. | 55 | 19.4 | 2.8 | 1 |
+| Mental Singularity | PSYCHIC | Esp. | 600 | 60 | 10.0 | 1 |
+| Powder Snow | ICE | Esp. | 40 | 15.9 | 2.5 | 1 |
+| Psychic Noise | PSYCHIC | Esp. | 75 | 24.1 | 3.1 | 1 |
+| Psycho Boost | PSYCHIC | Esp. | 140 | 32.4 | 4.3 | 1 |
+| Sheer Cold | ICE | Esp. | 120 | 31.2 | 3.8 | 1 |
+| Stored Power | PSYCHIC | Esp. | 25 | 12.4 | 2.0 | 1 |
